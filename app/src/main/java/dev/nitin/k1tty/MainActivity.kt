@@ -18,37 +18,37 @@ package dev.nitin.k1tty
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import dev.nitin.k1tty.ui.theme.MyTheme
+import dev.nitin.k1tty.view.K1ttyRoot
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val currentTheme = isSystemInDarkTheme()
+            val toggleTheme: () -> Unit = {
+                if (currentTheme) setDayTheme() else setDarkTheme()
+            }
             MyTheme {
-                MyApp()
+                Surface(color = MaterialTheme.colors.background) {
+                    K1ttyRoot(toggleTheme = toggleTheme)
+                }
             }
         }
     }
-}
-
-// Start building your app here!
-@Composable
-fun MyApp() {
-    Surface(color = MaterialTheme.colors.background) {
-        Text(text = "Ready... Set... GO!")
+    private fun setDayTheme() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
-}
 
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun LightPreview() {
-    MyTheme {
-        MyApp()
+    private fun setDarkTheme() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 }
 
@@ -56,6 +56,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        MyApp()
+        K1ttyRoot(toggleTheme = { })
     }
 }
