@@ -2,12 +2,13 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.example.androiddevchallenge"
+        applicationId "dev.nitin.k1tty"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -61,6 +62,11 @@ android {
         excludes += "/META-INF/AL2.0"
         excludes += "/META-INF/LGPL2.1"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '30.0.3'
 }
 
 dependencies {
@@ -78,4 +84,9 @@ dependencies {
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
