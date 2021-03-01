@@ -5,11 +5,10 @@ data class Cat(
     val name: String,
     val age: Double,
     val gender: String,
-    val color: String,
-    val weight: Double,
+    val friendly: Boolean,
+    val clean: String,
+    val verified : Boolean,
     val location: String,
     val image: Int,
-    val story: String,
-    val user: User
-
+    val summary: String,
 )
