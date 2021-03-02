@@ -12,7 +12,7 @@ import dev.nitin.k1tty.navigation.Page
 @Composable
 fun K1ttyRoot(toggleTheme: () -> Unit) {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = "profile") {
+    NavHost(navController, startDestination = Page.Home.route) {
         composable(Page.Home.route) {
             Home(
                 navController = navController,
